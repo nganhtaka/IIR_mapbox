@@ -1,9 +1,12 @@
-### Run :
+### Run cette commande ci-desous puis ouvrir par index.html:
 
 > npm install mapbox-gl --save
 
+### Read more :
+https://docs.mapbox.com/mapbox-gl-js/example/animate-a-line/
 
-### add your map to the site : 
+
+### Add your map to the site : 
 
     ```
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -14,6 +17,3 @@
     style: 'mapbox://styles/mapbox/streets-v11'
     });
     ```
-
-### Read more :
-https://docs.mapbox.com/mapbox-gl-js/example/animate-a-line/
