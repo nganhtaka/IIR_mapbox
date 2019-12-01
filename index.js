@@ -1,9 +1,11 @@
+var fs = require('fs');
+
 mapboxgl.accessToken = "pk.eyJ1Ijoibmdhbmh0YWthIiwiYSI6ImNrMmxxbTd3OTA1eHEzZW8yY3VvZjVxeGEifQ.8V-7GFmm1KEG2ZGtCgkdbw";
 
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/light-v9',
-  center: [8.538961, 47.372476],
+  center: [3.0667, 50.6333],
   zoom: 16,
   pitch: 40,
   hash: true
@@ -40,7 +42,7 @@ map.on('load', function() {
           [22, 180]
         ]
       },
-      'circle-color': '#ff7770'
+      'circle-color': '#00f'
     },
     "source": {
       "type": "geojson",
@@ -50,7 +52,7 @@ map.on('load', function() {
             "type": "Feature",
             "geometry": {
               "type": "Point",
-              "coordinates": [8.538961, 47.372476]
+              "coordinates": [3.0667, 50.6333]
             },
             "properties": {
               "frequency": 100
@@ -60,7 +62,7 @@ map.on('load', function() {
             "type": "Feature",
             "geometry": {
               "type": "Point",
-              "coordinates": [8.539961, 47.372476]
+              "coordinates":[3.1, 50.6333]
             },
             "properties": {
               "frequency": 44
