@@ -16,7 +16,7 @@ map.on('load', function() {
     'type': 'fill-extrusion',
     'source': {
       'type': 'geojson',
-      'data': 'lib/voies_mel_draw_polygon.geojson'
+      'data': '../lib/data_trans/voies_mel_draw_polygon.geojson'
     },
     'paint': {
       'fill-extrusion-color': ['get', 'color'],

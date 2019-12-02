@@ -2,7 +2,7 @@ import re
 import json
 
 def main():
-    fin= open("voies_mel.geojson","r")
+    fin= open("../data_origin/voies_mel.geojson","r")
 
     oneline = fin.read()
     datain = json.loads(oneline)

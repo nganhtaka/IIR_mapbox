@@ -1,6 +1,6 @@
 mapboxgl.accessToken = "pk.eyJ1Ijoibmdhbmh0YWthIiwiYSI6ImNrMmxxbTd3OTA1eHEzZW8yY3VvZjVxeGEifQ.8V-7GFmm1KEG2ZGtCgkdbw";
 
-var url = "lib/voies_mel_draw_circle.geojson";
+var url = "../lib/data_trans/voies_mel_draw_circle.geojson";
 
 var map = new mapboxgl.Map({
   container: 'map',

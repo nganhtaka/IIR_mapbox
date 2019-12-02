@@ -2,8 +2,8 @@ import re
 import json
 
 def main():
-    fin= open("voies_mel.geojson","r")
-    fout= open("voies_mel_draw_polygon.geojson","w+")
+    fin= open("../data_origin/voies_mel.geojson","r")
+    fout= open("../data_trans/voies_mel_draw_polygon.geojson","w+")
 
     oneline = fin.read()
     datain = json.loads(oneline)
