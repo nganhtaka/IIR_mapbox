@@ -3,7 +3,7 @@ import json
 
 def main():
     fin= open("voies_mel.geojson","r")
-    fout= open("voies_mel_draw.geojson","w+")
+    fout= open("voies_mel_draw_circle.geojson","w+")
 
     oneline = fin.read()
     datain = json.loads(oneline)
@@ -21,13 +21,15 @@ def main():
               "coordinates": []
             },
             "properties": {
-              "frequency": 0
+              "frequency": 0,
+              "color" : '#f4eaac'
             }
           }
 
         newFeature["geometry"]["coordinates"] = feature["properties"]["geo_point_2d"][1], feature["properties"]["geo_point_2d"][0]
         
         frequency = 0
+        color = '#f4eaac'
         if 'properties' in feature and 'trafic' in feature["properties"]:
           # 0   : VOIE NON CIRCULEE
           # 50  : DESSERTE  MJO INFERIEURE A  1.500 VEH/JOUR
@@ -40,17 +42,22 @@ def main():
             if ("30.000" in x):
               if ("13.000" in x):
                 frequency = 400
+                color = '#601300'
               else:
                 frequency = 800
+                color = '#381a06'
             elif ("6.000" in x):
               if ("13.000" in x):
                 frequency = 200
+                color = '#c53200'
               else:
                 frequency = 100
+                color = '#eea800'
             elif ("1.500" in x):
               frequency = 50
         
         newFeature["properties"]["frequency"] = frequency
+        newFeature["properties"]["color"] = color
 
         dataout["features"].append(newFeature)
 

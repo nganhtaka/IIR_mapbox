@@ -1,6 +1,6 @@
 mapboxgl.accessToken = "pk.eyJ1Ijoibmdhbmh0YWthIiwiYSI6ImNrMmxxbTd3OTA1eHEzZW8yY3VvZjVxeGEifQ.8V-7GFmm1KEG2ZGtCgkdbw";
 
-var url = "lib/voies_mel_draw.geojson";
+var url = "lib/voies_mel_draw_circle.geojson";
 
 var map = new mapboxgl.Map({
   container: 'map',
@@ -30,15 +30,7 @@ map.on('load', function() {
       }
     },
     'paint': {
-      'fill-extrusion-color': [
-        'match',
-        ['get', 'frequency'],
-        800, '#381a06',
-        400, '#601300',
-        200, '#c53200',
-        100, '#eea800',
-        '#f4eaac'
-        ],
+      'fill-extrusion-color': ['get', 'color'],
       'fill-extrusion-height': ['get', 'frequency'],
       'fill-extrusion-base': 0,
       'fill-extrusion-opacity': 0.7
