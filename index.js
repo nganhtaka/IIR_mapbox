@@ -4,11 +4,12 @@ var url = "lib/voies_mel_draw.geojson";
 
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/light-v9',
+  style: 'mapbox://styles/mapbox/light-v8',
   center: [3.0667, 50.6333],
-  zoom: 16,
-  pitch: 40,
-  hash: true
+  zoom: 15.5,
+  pitch: 45,
+  bearing: -17.6,
+  antialias: true
 });
 
 map.on('load', function() {
@@ -29,10 +30,18 @@ map.on('load', function() {
       }
     },
     'paint': {
-      'fill-extrusion-color': '#00f',
+      'fill-extrusion-color': [
+        'match',
+        ['get', 'frequency'],
+        800, '#381a06',
+        400, '#601300',
+        200, '#c53200',
+        100, '#eea800',
+        '#f4eaac'
+        ],
       'fill-extrusion-height': ['get', 'frequency'],
       'fill-extrusion-base': 0,
-      'fill-extrusion-opacity': 0.9
+      'fill-extrusion-opacity': 0.7
     }
   });
 
@@ -44,9 +53,7 @@ map.on('load', function() {
             'base': 1.75,
             'stops': [[12, 2], [22, 180]]
         },
-        // color circles by ethnicity, using a match expression
-        // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
-        'circle-color': '#00f'
+        'circle-opacity' : 0
     },
     "source": 'my_data',
   });

@@ -30,7 +30,7 @@ https://docs.mapbox.com/mapbox-gl-js/example/animate-a-line/
 
 ### Execution :
 - check les données de trafic différents `test_trafic.py`
-- transformer le fichier par `create_feature_fill_extrusion.py`
+- transformer le fichier par `create_feature_circle.py`
 - Lancer un server à la racine du projet (là où il y a README.md) : `php -S localhost:8080`
 - sur un navigateur : `http://localhost:8080/index.html`
 

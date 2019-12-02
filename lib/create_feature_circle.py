@@ -30,25 +30,25 @@ def main():
         frequency = 0
         if 'properties' in feature and 'trafic' in feature["properties"]:
           # 0   : VOIE NON CIRCULEE
-          # 30  : DESSERTE  MJO INFERIEURE A  1.500 VEH/JOUR
-          # 60  : DISTRIBUTION MJO  DE  1.500 A  6.000 VEH/JOUR
-          # 90  : LIAISON  MJO  DE  6.000 A 13.000 VEH/JOUR
-          # 120 : LIAISON  MJO  DE 13.000 A 30.000 VEH/JOUR
-          # 150 : LIAISON  MJO SUPERIEURE A 30.000 VEH/JOUR
+          # 50  : DESSERTE  MJO INFERIEURE A  1.500 VEH/JOUR
+          # 100  : DISTRIBUTION MJO  DE  1.500 A  6.000 VEH/JOUR
+          # 200  : LIAISON  MJO  DE  6.000 A 13.000 VEH/JOUR
+          # 400 : LIAISON  MJO  DE 13.000 A 30.000 VEH/JOUR
+          # 800 : LIAISON  MJO SUPERIEURE A 30.000 VEH/JOUR
 
             x = feature["properties"]["trafic"]
             if ("30.000" in x):
               if ("13.000" in x):
-                frequency = 120
+                frequency = 400
               else:
-                frequency = 150
+                frequency = 800
             elif ("6.000" in x):
               if ("13.000" in x):
-                frequency = 90
+                frequency = 200
               else:
-                frequency = 60
+                frequency = 100
             elif ("1.500" in x):
-              frequency = 30
+              frequency = 50
         
         newFeature["properties"]["frequency"] = frequency
 
