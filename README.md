@@ -1,3 +1,10 @@
+
+# *IIR - M2-Eservice - Université de Lille - 2019-2020*
+
+---
+
+**Sarah BEN ABDESSLEM, Caméléa OUARKOUB, Jayjaywantee KOODUN, Thi-Ngoc-Anh TRAN, Clara VERQUERRE**
+
 ### Run cette commande ci-desous puis ouvrir par index.html:
 
 > npm install mapbox-gl --save
@@ -20,3 +27,13 @@ https://docs.mapbox.com/mapbox-gl-js/example/animate-a-line/
 
 ### Données :
 - https://opendata.lillemetropole.fr/explore/dataset/voies_mel/table/?flg=fr
+
+### Execution :
+- check les données de trafic différents `test_trafic.py`
+- transformer le fichier par `create_feature_fill_extrusion.py`
+- Lancer un server à la racine du projet (là où il y a README.md) : `php -S localhost:8080`
+- sur un navigateur : `http://localhost:8080/index.html`
+
+
+
+![Example](./example.png)

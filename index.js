@@ -1,6 +1,6 @@
-var fs = require('fs');
-
 mapboxgl.accessToken = "pk.eyJ1Ijoibmdhbmh0YWthIiwiYSI6ImNrMmxxbTd3OTA1eHEzZW8yY3VvZjVxeGEifQ.8V-7GFmm1KEG2ZGtCgkdbw";
+
+var url = "lib/voies_mel_draw.geojson";
 
 var map = new mapboxgl.Map({
   container: 'map',
@@ -12,6 +12,11 @@ var map = new mapboxgl.Map({
 });
 
 map.on('load', function() {
+
+  map.addSource("my_data", {
+    type: "geojson",
+    data: url
+  });
 
   map.addLayer({
     'id': 'extrusion',
@@ -32,57 +37,32 @@ map.on('load', function() {
   });
 
   map.addLayer({
-    "id": "total",
+    'id': 'total',
     'type': 'circle',
     'paint': {
-      'circle-radius': {
-        'base': 1.75,
-        'stops': [
-          [12, 2],
-          [22, 180]
-        ]
-      },
-      'circle-color': '#00f'
+        'circle-radius': {
+            'base': 1.75,
+            'stops': [[12, 2], [22, 180]]
+        },
+        // color circles by ethnicity, using a match expression
+        // https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+        'circle-color': '#00f'
     },
-    "source": {
-      "type": "geojson",
-      "data": {
-        "type": "FeatureCollection",
-        "features": [{
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [3.0667, 50.6333]
-            },
-            "properties": {
-              "frequency": 100
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates":[3.1, 50.6333]
-            },
-            "properties": {
-              "frequency": 44
-            }
-          }
-        ]
-      }
-    }
+    "source": 'my_data',
   });
 
 
   map.on('sourcedata', function(e) {
-    if (e.sourceId !== 'total') return
+    //if (e.sourceId !== 'total' && e.sourceId !== 'my_data') return
     if (e.isSourceLoaded !== true) return
+    var features = map.queryRenderedFeatures({layers: ['total']}); 
 
     var data = {
       "type": "FeatureCollection",
       "features": []
     }
-    e.source.data.features.forEach(function(f) {
+    
+    features.forEach(function(f) {
       var object = turf.centerOfMass(f)
       var center = object.geometry.coordinates
       var radius = 10;
