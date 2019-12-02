@@ -4,9 +4,9 @@ var url = "lib/voies_mel_draw_circle.geojson";
 
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/light-v8',
+  style: 'mapbox://styles/mapbox/streets-v10',
   center: [3.0667, 50.6333],
-  zoom: 15.5,
+  zoom: 15,
   pitch: 45,
   bearing: -17.6,
   antialias: true
