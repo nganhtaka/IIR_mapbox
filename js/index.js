@@ -1,18 +1,22 @@
-mapboxgl.accessToken = "pk.eyJ1Ijoibmdhbmh0YWthIiwiYSI6ImNrMmxxbTd3OTA1eHEzZW8yY3VvZjVxeGEifQ.8V-7GFmm1KEG2ZGtCgkdbw";
+mapboxgl.accessToken = 'pk.eyJ1Ijoibmdhbmh0YWthIiwiYSI6ImNrMmxxbTd3OTA1eHEzZW8yY3VvZjVxeGEifQ.8V-7GFmm1KEG2ZGtCgkdbw';
 
 var url = "../lib/data_trans/voies_mel_draw_circle.geojson";
 
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v10',
+  style: 'mapbox://styles/mapbox/streets-v11',
   center: [3.0667, 50.6333],
   zoom: 15,
-  pitch: 45,
+  pitch: 15,
   bearing: -17.6,
-  antialias: true
+  //antialias: true
 });
 
 map.on('load', function() {
+
+  map.addControl(new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+  }), 'top-left');
 
   map.addSource("my_data", {
     type: "geojson",
@@ -73,5 +77,6 @@ map.on('load', function() {
       data.features.push(turf.circle(center, radius, options))
     })
     map.getSource('extrusion').setData(data);
-  })
+  })  
+  
 });
