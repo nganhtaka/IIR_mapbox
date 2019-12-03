@@ -12,30 +12,11 @@ var map = new mapboxgl.Map({
   //antialias: true
 });
 
-function inLine(a, b, c) {
-  xmin = (a[0]<c[0]) ? a[0] : c[0];
-  ymin = (a[1]<c[1]) ? a[1] : c[1];
-  xmax = (a[0]>c[0]) ? a[0] : c[0];
-  ymax = (a[1]>c[1]) ? a[1] : c[1];
-  return (b[0]>=xmin && b[0]<=xmax && b[1]>=ymin && b[1]<=ymax);
-}
-
-function inRoute(p, route) {
-  let founded=false;
-  let i=0;
-  while (!founded && i<route.length-1) {
-    if (inLine(route[i], p, route[i+1])) founded=true;
-    i++;
-  }
-  return founded;
-}
-
 map.on('load', function() {
 
-  var directions =  new MapboxDirections({
+  map.addControl(new MapboxDirections({
     accessToken: mapboxgl.accessToken
-  });
-  map.addControl(directions, 'top-left');
+  }), 'top-left');
 
   map.addSource("my_data", {
     type: "geojson",
@@ -73,39 +54,29 @@ map.on('load', function() {
     "source": 'my_data',
   });
 
-  directions.on("route", e => {
-    // routes is an array of route objects as documented here:
-    // https://docs.mapbox.com/api/navigation/#route-object
-    let routes = e.route[0].legs[0].steps.map(e => e.maneuver.location);
-    
-    var loaded = false;
-    map.on('sourcedata', function(e) {
-      if (loaded) return
-      //if (e.sourceId !== 'total' && e.sourceId !== 'my_data') return
-      if (e.isSourceLoaded !== true) return
-      var features = map.queryRenderedFeatures({layers: ['total']}); 
 
-      var data = {
-        "type": "FeatureCollection",
-        "features": []
-      }
-      
-      features.forEach(function(f) {
-        
-        if (inRoute(f.geometry.coordinates, routes)) {
-          var object = turf.centerOfMass(f)
-          var center = object.geometry.coordinates
-          var radius = 10;
-          var options = {
-            steps: 16,
-            units: 'meters',
-            properties: object.properties
-          };
-          data.features.push(turf.circle(center, radius, options))
-        }
-      })
-      loaded = true;
-      map.getSource('extrusion').setData(data);
+  map.on('sourcedata', function(e) {
+    //if (e.sourceId !== 'total' && e.sourceId !== 'my_data') return
+    if (e.isSourceLoaded !== true) return
+    var features = map.queryRenderedFeatures({layers: ['total']}); 
+
+    var data = {
+      "type": "FeatureCollection",
+      "features": []
+    }
+    
+    features.forEach(function(f) {
+      var object = turf.centerOfMass(f)
+      var center = object.geometry.coordinates
+      var radius = 10;
+      var options = {
+        steps: 16,
+        units: 'meters',
+        properties: object.properties
+      };
+      data.features.push(turf.circle(center, radius, options))
     })
-  })
+    map.getSource('extrusion').setData(data);
+  })  
+  
 });
