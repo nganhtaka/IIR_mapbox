@@ -5,6 +5,11 @@
 
 **Sarah BEN ABDESSLEM, Caméléa OUARKOUB, Jayjaywantee KOODUN, Thi-Ngoc-Anh TRAN, Clara VERQUERRE**
 
+### Projet déployé :
+
+- https://iir.herokuapp.com/html/index_route.html
+- https://iir.herokuapp.com/html/index.html
+
 ### Projet utilise Mapbox.js, 
 Read more : 
 - https://www.mapbox.com/
